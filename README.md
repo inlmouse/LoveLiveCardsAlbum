@@ -12,7 +12,7 @@ The size of all cards is about 200M and the excution time may over 1 hour(Of cou
 ## Results
 
 Root Directory:
-![result](https://raw.githubusercontent.com/inlmouse/LoveLiveCardsAlbum/master/FestivalCards/bin/Debug/pics/Root.png)
+![result](https://raw.githubusercontent.com/inlmouse/LoveLiveCardsAlbum/master/FestivalCards/bin/Debug/pics/root.png)
 
 Kotori(みなみ ことり):
 ![result](https://raw.githubusercontent.com/inlmouse/LoveLiveCardsAlbum/master/FestivalCards/bin/Debug/pics/Kotori.png)
