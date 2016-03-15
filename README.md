@@ -3,9 +3,9 @@ This is a Festival cards download tool of Love Live! School Idol Project written
 
 ## Usage
 
-Just run the programm in Debug folder without any config(Microsoft Windows is required). It will download all festival cards form [School Idol Tomodachi - Cards Album](http://schoolido.lu/cards/).
+Just run the program in bin\Debug folder without any config(Microsoft Windows is required). It will download all festival cards from [School Idol Tomodachi - Cards Album](http://schoolido.lu/cards/).
 
-The pictures will save respectively in your Documents\FestivalCards\$idol_name$, including all 87 girls in School Idol Project.
+The pictures will save respectively in your Documents\FestivalCards\$idol_name$.png, including all 87 girls in School Idol Project.
 
 The size of all cards is about 200M and the excution time may over 1 hour(Of course, this depends on your network status).
 
