@@ -58,8 +58,8 @@ namespace FestivalCards
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                Console.ReadLine();
-                throw;
+                //Console.ReadLine();
+                //throw;
             }
            
         }
