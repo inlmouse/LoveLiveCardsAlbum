@@ -12,6 +12,61 @@ namespace FestivalCards
     {
         static void Main(string[] args)
         {
+            try
+            {
+                string MainURL = "http://www.project-imas.com/wiki/THE_iDOLM@STER:_Cinderella_Girls";
+                string strResult = Common.GetWebContent(MainURL);
+                string[] picres = Common.MatchExpr(strResult, "<a href=\"" + @"/wiki/\w*\" + "\"");
+                string[] names = new string[picres.Length];
+                for (int i = 1; i < picres.Length-1; i++)
+                {
+                    names[i] = picres[i].Substring(15, picres[i].Length - 16);
+                    //Console.WriteLine(names[i]);
+                    picres[i] = "http://www.project-imas.com"+picres[i].Substring(9, picres[i].Length - 10);
+                    
+                    //Console.WriteLine(picres[i]);
+                    string ChildURL = picres[i];
+                    string singleidol = Common.GetWebContent(ChildURL);
+                    string[] idolpics = Common.MatchExpr(singleidol, "<a href=\"" + @"/wiki/File:\S*\.jpg" + "\"");
+                    string[] filenames=new string[idolpics.Length];
+                    
+                    for (int j = 0; j < idolpics.Length; j++)
+                    {
+                        filenames[j] = idolpics[j].Substring(20,idolpics[j].Length-21);
+                        //Console.WriteLine(filenames[j]);
+                        idolpics[j] = "http://www.project-imas.com" + idolpics[j].Substring(9, idolpics[j].Length - 10);
+                        
+                        string realpic = Common.GetWebContent(idolpics[j]);
+                        string[] realpics = Common.MatchExpr(realpic, @"/w/images/\S/\S\S/\S*.jpg");
+                        if (realpics.Length>0)
+                        {
+                            string xmlurl = "http://www.project-imas.com" + realpics[0];
+                            Console.WriteLine("Download from: " + xmlurl);
+                            if (names[i].Length+filenames[j].Length<200)
+                            {
+                                Common.DownloadCards(xmlurl, names[i], filenames[j]);
+                            }
+                        }
+                        
+                    }
+                    
+                    //Console.ReadLine();
+                }
+
+                Console.WriteLine(picres.Length);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.ReadLine();
+                throw;
+            }
+           
+        }
+
+
+        private void LoveLive()
+        {
             string Url = "http://schoolido.lu/cards/?page=";
             string strResult = null;
             try
@@ -19,19 +74,8 @@ namespace FestivalCards
                 for (int x = 1; x < 95; x++)
                 {
                     string urlx = Url + x;
-                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlx);
-                    request.Timeout = 30000;
-                    //out time setting
-                    //request.Headers.Set("Pragma", "no-cache");
-                    request.UserAgent = "Sync";//fake here
-                    request.Accept = "*/*";
-                    request.UseDefaultCredentials = true;
-                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();//403 no access authorization, re-fake UserAgent.
-                    Stream streamReceive = response.GetResponseStream();
-                    Encoding encoding = Encoding.GetEncoding("GB2312");
-                    StreamReader streamReader = new StreamReader(streamReceive, encoding);
-                    strResult = streamReader.ReadToEnd();
-                    string[] picres = MatchExpr(strResult, "img src=\"" + @"http://i.schoolido.lu/cards/\d*\w*\.png");
+                    strResult = Common.GetWebContent(urlx);
+                    string[] picres = Common.MatchExpr(strResult, "img src=\"" + @"http://i.schoolido.lu/cards/\d*\w*\.png");
                     string[] filenames = new string[picres.Length];
                     string[] names = new string[picres.Length];
                     for (int i = 0; i < picres.Length; i++)
@@ -51,81 +95,26 @@ namespace FestivalCards
                         }
                         else
                         {
-                            names[i] = filenames[i].Substring(isLetter(filenames[i]),
-                                filenames[i].LastIndexOf(".") - isLetter(filenames[i]));
+                            names[i] = filenames[i].Substring(Common.isLetter(filenames[i]),
+                                filenames[i].LastIndexOf(".") - Common.isLetter(filenames[i]));
                         }
                         //Console.WriteLine(picres[i]);
                         //Console.WriteLine(filenames[i]);
                         //Console.WriteLine(names[i]);
-                        DownloadCards(picres[i], names[i], filenames[i]);
+                        Common.DownloadCards(picres[i], names[i], filenames[i]);
                     }
                 }
-                
+
                 Console.WriteLine("\nAll Cards Download Complete!\n");
                 Console.ReadLine();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 //Console.WriteLine("Access Denied");
                 Console.WriteLine(ex);
                 Console.ReadLine();
             }
         }
-
-        private static string[] MatchExpr(string text, string expr)
-        {
-            MatchCollection mc = Regex.Matches(text, expr);
-            string[] res = new string[mc.Count];
-            int i = 0;
-            foreach (Match m in mc)
-            {
-                res[i] = m.ToString();
-                i++;
-            }
-            return res;
-        }
-
-        private static void DownloadCards(string URL, string name, string FileName)
-        {
-            try
-            {
-                WebClient myWebClient = new WebClient();
-                myWebClient.UseDefaultCredentials = true;
-                myWebClient.Headers.Add("User-Agent: Other");
-                string cpath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\FestivalCards\"+name;
-                if (!Directory.Exists(cpath))
-                {
-                    Directory.CreateDirectory(cpath);
-                }
-                if (!File.Exists(cpath + @"\" + FileName))
-                {
-                    myWebClient.DownloadFile(URL, cpath + @"\" + FileName);
-                    Console.WriteLine(FileName + " Downloaded");
-                }
-                Console.WriteLine(FileName + " is already exist");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                throw;
-            }
-
-        }
-
-        public static int isLetter(string validString)
-        {
-            byte[] tempbyte = System.Text.Encoding.Default.GetBytes(validString);
-            int pos = 0;
-            for (int i = 0; i < validString.Length; i++)
-            {
-                byte by = tempbyte[i];
-                if ((by >= 65) && (by <= 90) || ((by >= 97) && (by <= 122)))
-                {
-                    break;
-                }
-                pos++;
-            }
-            return pos;
-        }
+        
     }
 }

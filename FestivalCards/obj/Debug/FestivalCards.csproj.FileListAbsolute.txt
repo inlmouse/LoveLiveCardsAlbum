@@ -3,3 +3,8 @@ D:\Users\DELL\Documents\GitHub\LoveLiveCardsAlbum\FestivalCards\FestivalCards\bi
 D:\Users\DELL\Documents\GitHub\LoveLiveCardsAlbum\FestivalCards\FestivalCards\obj\Debug\FestivalCards.csprojResolveAssemblyReference.cache
 D:\Users\DELL\Documents\GitHub\LoveLiveCardsAlbum\FestivalCards\FestivalCards\obj\Debug\FestivalCards.exe
 D:\Users\DELL\Documents\GitHub\LoveLiveCardsAlbum\FestivalCards\FestivalCards\obj\Debug\FestivalCards.pdb
+D:\Users\DELL\Documents\GitHub\LoveLiveCardsAlbum\FestivalCards\obj\Debug\FestivalCards.exe
+D:\Users\DELL\Documents\GitHub\LoveLiveCardsAlbum\FestivalCards\obj\Debug\FestivalCards.pdb
+D:\Users\DELL\Documents\GitHub\LoveLiveCardsAlbum\FestivalCards\bin\Debug\FestivalCards.exe
+D:\Users\DELL\Documents\GitHub\LoveLiveCardsAlbum\FestivalCards\bin\Debug\FestivalCards.pdb
+D:\Users\DELL\Documents\GitHub\LoveLiveCardsAlbum\FestivalCards\obj\Debug\FestivalCards.csprojResolveAssemblyReference.cache
