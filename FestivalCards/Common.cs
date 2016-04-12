@@ -10,6 +10,26 @@ namespace FestivalCards
 {
     class Common
     {
+        static Random m_rnd = new Random();
+        public static char getRandomChar()
+        {
+            int ret = m_rnd.Next(122);
+            while (ret < 48 || (ret > 57 && ret < 65) || (ret > 90 && ret < 97))
+            {
+                ret = m_rnd.Next(122);
+            }
+            return (char)ret;
+        }
+        public static string getRandomString(int length)
+        {
+            StringBuilder sb = new StringBuilder(length);
+            for (int i = 0; i < length; i++)
+            {
+                sb.Append(getRandomChar());
+            }
+            return sb.ToString();
+        }     
+
         public static int isLetter(string validString)
         {
             byte[] tempbyte = Encoding.Default.GetBytes(validString);
@@ -52,7 +72,8 @@ namespace FestivalCards
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                throw;
+                //throw;
+                //continue;
             }
         }
 
@@ -62,7 +83,7 @@ namespace FestivalCards
             request.Timeout = 30000;
             //out time setting
             //request.Headers.Set("Pragma", "no-cache");
-            request.UserAgent = "Sync";//fake here
+            request.UserAgent = getRandomString(7);//"Sync";//fake here
             request.Accept = "*/*";
             request.UseDefaultCredentials = true;
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();//403 no access authorization, re-fake UserAgent.

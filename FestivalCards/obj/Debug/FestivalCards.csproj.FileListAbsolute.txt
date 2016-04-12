@@ -8,3 +8,8 @@ D:\Users\DELL\Documents\GitHub\LoveLiveCardsAlbum\FestivalCards\obj\Debug\Festiv
 D:\Users\DELL\Documents\GitHub\LoveLiveCardsAlbum\FestivalCards\bin\Debug\FestivalCards.exe
 D:\Users\DELL\Documents\GitHub\LoveLiveCardsAlbum\FestivalCards\bin\Debug\FestivalCards.pdb
 D:\Users\DELL\Documents\GitHub\LoveLiveCardsAlbum\FestivalCards\obj\Debug\FestivalCards.csprojResolveAssemblyReference.cache
+C:\Users\Glass\Documents\GitHub\LoveLiveCardsAlbum\FestivalCards\obj\Debug\FestivalCards.exe
+C:\Users\Glass\Documents\GitHub\LoveLiveCardsAlbum\FestivalCards\obj\Debug\FestivalCards.pdb
+C:\Users\Glass\Documents\GitHub\LoveLiveCardsAlbum\FestivalCards\bin\Debug\FestivalCards.exe
+C:\Users\Glass\Documents\GitHub\LoveLiveCardsAlbum\FestivalCards\bin\Debug\FestivalCards.pdb
+C:\Users\Glass\Documents\GitHub\LoveLiveCardsAlbum\FestivalCards\obj\Debug\FestivalCards.csprojResolveAssemblyReference.cache

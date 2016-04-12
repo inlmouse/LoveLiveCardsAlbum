@@ -12,44 +12,58 @@ namespace FestivalCards
     {
         static void Main(string[] args)
         {
+            if (args[0] == "1") 
+            {
+                IdolMaster();
+            }
+            else
+            {
+                LoveLive();
+            }
+           
+        }
+
+        private static void IdolMaster()
+        {
             try
             {
                 string MainURL = "http://www.project-imas.com/wiki/THE_iDOLM@STER:_Cinderella_Girls";
                 string strResult = Common.GetWebContent(MainURL);
                 string[] picres = Common.MatchExpr(strResult, "<a href=\"" + @"/wiki/\w*\" + "\"");
                 string[] names = new string[picres.Length];
-                for (int i = 1; i < picres.Length-1; i++)
+                Console.WriteLine("Idol Number: " + picres.Length);//
+                for (int i = 40; i < picres.Length - 1; i++)
                 {
                     names[i] = picres[i].Substring(15, picres[i].Length - 16);
                     //Console.WriteLine(names[i]);
-                    picres[i] = "http://www.project-imas.com"+picres[i].Substring(9, picres[i].Length - 10);
-                    
+                    picres[i] = "http://www.project-imas.com" + picres[i].Substring(9, picres[i].Length - 10);
+
                     //Console.WriteLine(picres[i]);
                     string ChildURL = picres[i];
                     string singleidol = Common.GetWebContent(ChildURL);
                     string[] idolpics = Common.MatchExpr(singleidol, "<a href=\"" + @"/wiki/File:\S*\.jpg" + "\"");
-                    string[] filenames=new string[idolpics.Length];
-                    
+                    string[] filenames = new string[idolpics.Length];
+                    Console.WriteLine("pictures of idol: " + idolpics.Length);//
                     for (int j = 0; j < idolpics.Length; j++)
                     {
-                        filenames[j] = idolpics[j].Substring(20,idolpics[j].Length-21);
+                        filenames[j] = idolpics[j].Substring(20, idolpics[j].Length - 21);
                         //Console.WriteLine(filenames[j]);
                         idolpics[j] = "http://www.project-imas.com" + idolpics[j].Substring(9, idolpics[j].Length - 10);
-                        
+
                         string realpic = Common.GetWebContent(idolpics[j]);
                         string[] realpics = Common.MatchExpr(realpic, @"/w/images/\S/\S\S/\S*.jpg");
-                        if (realpics.Length>0)
+                        if (realpics.Length > 0)
                         {
                             string xmlurl = "http://www.project-imas.com" + realpics[0];
                             Console.WriteLine("Download from: " + xmlurl);
-                            if (names[i].Length+filenames[j].Length<200)
+                            if (names[i].Length + filenames[j].Length < 200)
                             {
                                 Common.DownloadCards(xmlurl, names[i], filenames[j]);
                             }
                         }
-                        
+
                     }
-                    
+
                     //Console.ReadLine();
                 }
 
@@ -60,12 +74,10 @@ namespace FestivalCards
                 Console.WriteLine(ex);
                 //Console.ReadLine();
                 //throw;
+                //continue;
             }
-           
         }
-
-
-        private void LoveLive()
+        private static void LoveLive()
         {
             string Url = "http://schoolido.lu/cards/?page=";
             string strResult = null;
